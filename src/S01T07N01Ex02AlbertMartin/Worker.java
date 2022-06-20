@@ -4,7 +4,6 @@ public abstract class Worker {
 
     private String name;
     private String surname;
-   // private int seniority;
 
     public static final int PRICE_PER_HOUR = 150;
     public static final int BONUS_PER_YEAR = 25;
@@ -12,37 +11,36 @@ public abstract class Worker {
     public Worker(String name, String surname) {
         this.name = name;
         this.surname = surname;
-       // this.seniority= seniority;
     }
 
+    //Cada vegada que marquem un mètode com a @Deprecated, indiquem els motius.
 
-    public String getName() {
-        return name;
-    }
-
+    /**
+     * @ deprecated use of enviarNombre
+     * is discouraged because is better to use terms in english.
+     * Use getName.
+     */
     @Deprecated
-    public String enviarNombre() {return  name;}
+    public String enviarNombre() {return name;}
+    public String getName() {return name;}
+
+    /**
+     * @ deprecated use of enviarNombre
+     * is discouraged because it is better to use terms in english.
+     * Use getSurname
+     */
     @Deprecated
-    public String enviarApellido() {
-        return surname;
-    }
-    public String getSurname() {
-        return surname;
-    }
+    public String enviarApellido() { return surname;}
+    public String getSurname() { return surname;}
 
-   // public int getSeniority() {return seniority;}
-
-   /* public int calculateSeniorityBonus() {
-        Period period = Period.between(incorporationDate, LocalDate.now());
-        int seniorityBonus= period.getYears()*BONUS_PER_YEAR;
-        return seniorityBonus;
-    }*/
-
+    /**
+     * @deprecated use of calculateSalary(double numberOfHours)
+     * is discouraged because now there is a new plugin to add to the salary.
+     * Use calculateSalary(double numberOfHours, int seniority);
+     */
     @Deprecated
     public abstract double calculateSalary(double numberOfHours);
 
-
     public abstract double calculateSalary(double numberOfHours, int seniority);
-
 
 }

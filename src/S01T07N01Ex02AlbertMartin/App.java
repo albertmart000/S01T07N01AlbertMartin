@@ -1,65 +1,42 @@
 package S01T07N01Ex02AlbertMartin;
 
-import java.util.Scanner;
-
 public class App {
     public static void main(String[] args) {
 
+        //Construïm dos objectes Worker i afegim per paràmetres el nombre d'hores treballades
+        //i un concepte nou, l'antiguitat a l'empresa.
+
         Worker worker1 = new FaceToFaceWorker("Herbie", "Mann", 150);
-        double numberOfHoursWorker1 = askForNumberOfHours(worker1);
-        int seniorityWorker1= askForSeniority(worker1);
-        double salaryWorker1 = calculateSalaryWorker1(worker1, numberOfHoursWorker1, seniorityWorker1);
-        shownResultsWorker1(worker1,salaryWorker1);
+        int numberOfHoursWorker1 = 300;
+        int seniorityWorker1= 15;
 
         Worker worker2 = new OnlineWorker("Frank", "Wess");
-        double numberOfHoursWorker2 = askForNumberOfHours(worker2);
-        int seniorityWorker2= askForSeniority(worker2);
-        Double salaryWorker2 = calculateSalaryWorker2(worker2, numberOfHoursWorker2, seniorityWorker2);
-        shownResultsWorker2(worker2, salaryWorker2);
+        int numberOfHoursWorker2 = 200;
+        int seniorityWorker2= 20;
 
+        //Invoquem dues funcions per calcular el sou, una amb el nou concepte i un altre sense aquest concepte.
+        //Però com hem afegit l'annotació @SuppressWarnings no apareix cap avís a la pantalla.
+
+        @SuppressWarnings("deprecation")
+        double salaryWorker1 = worker1.calculateSalary(numberOfHoursWorker1);
+        @SuppressWarnings("deprecation")
+        double salaryWorker2 = worker2.calculateSalary(numberOfHoursWorker2);
+
+        double newSalaryWorker1 = worker1.calculateSalary(numberOfHoursWorker1, seniorityWorker1);
+        double newSalaryWorker2 = worker1.calculateSalary(numberOfHoursWorker2, seniorityWorker2);
+
+        //Mostrem els resultats.
+        shownResultsWorker(worker1,newSalaryWorker1);
+        shownResultsWorker(worker2, newSalaryWorker2);
     }
 
-    private static void shownResultsWorker1(Worker worker1, double salaryWorker1) {
-        System.out.println("El sou de " +worker1.getName() + " " + worker1.getSurname() +
-                " amb tots el seus complements es: " + salaryWorker1+ "."); }
-
-
-
-    private static void shownResultsWorker2(Worker worker2, Double salaryWorker2) {
-        System.out.println("El sou de " +worker2.getSurname() + " " + worker2.getSurname() +
-                " amb tots el seus complements es: " + salaryWorker2+ ".");}
-
-    private static Double calculateSalaryWorker1(Worker worker1, double numberOfHoursWorker1) {
-       // worker1.calculateSeniorityBonus();
-        return worker1.calculateSalary(numberOfHoursWorker1);
+    //Els mètodes enviarNombre i enviarApellido són obsolets, però com hem afegit l'annotació
+    //@SuppressWarnings no apareix cap avís a la pantalla.
+    @SuppressWarnings("deprecation")
+    private static void shownResultsWorker(Worker worker, double newSalaryWorker) {
+        System.out.println("El sou de " + worker.enviarNombre() + " " + worker.enviarApellido() +
+                " amb tots el seus complements es: " + newSalaryWorker + ".");
     }
-    private static Double calculateSalaryWorker1(Worker worker1, double numberOfHoursWorker1, int seniorityWorker1) {
-        // worker1.calculateSeniorityBonus();
-        return worker1.calculateSalary(numberOfHoursWorker1, seniorityWorker1);
-    }
-
-    private static Double calculateSalaryWorker2(Worker worker2, double numberOfHoursWorker2, int seniorityWorker2) {
-       // worker2.calculateSeniorityBonus();
-       // return worker2.calculateSalary(numberOfHoursWorker2);
-        return worker2.calculateSalary(numberOfHoursWorker2, seniorityWorker2);
-    }
-
-   // private static int askForSeniority(Worker worker1) {
-  //  }
-
-    private static int askForSeniority(Worker worker) {
-        System.out.println("Quina antiguitat te " +
-                worker.getName() + " " + worker.getSurname() + "?.");
-        Scanner sc = new Scanner((System.in));
-        return sc.nextInt();
-    }
-
-    private static double askForNumberOfHours(Worker worker) {
-        System.out.println("Quantes hores ha treballat " +
-                worker.enviarNombre() + " " + worker.enviarApellido() + "?.");
-        Scanner sc = new Scanner((System.in));
-        return sc.nextDouble();
-    }
-
 
 }
+

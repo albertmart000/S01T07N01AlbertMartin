@@ -6,37 +6,21 @@ public class OnlineWorker extends Worker {
 
     public OnlineWorker(String name, String surname) {
         super(name, surname);
-
-    }
-
-    @Deprecated
-    public String enviarNombre() {
-        return getName();
-    }
-
-    @Deprecated
-    public String enviarApellido() {
-        return getSurname();
-    }
-    @Override
-    public String getSurname() {
-        return super.getSurname();
     }
 
     /**
-     * @param numberOFHours
-     * @return
+     * @deprecated use of calculateSalary(double numberOfHours)
+     * is discouraged because now there is a new plugin to add to the salary.
+     * Use calculateSalary(double numberOfHours, int seniority);
      */
-  //  @Override
     @Deprecated
     public double calculateSalary (double numberOFHours){
         return numberOFHours*PRICE_PER_HOUR + INTERNET_RATE;
     }
 
-
-    //@Override
-    public double calculateSalary (double numberOFHours, int seniority) { return numberOFHours*PRICE_PER_HOUR +
-            seniority*BONUS_PER_YEAR + INTERNET_RATE;
+    @Override
+    public double calculateSalary (double numberOFHours, int seniority) {
+        return numberOFHours*PRICE_PER_HOUR + seniority*BONUS_PER_YEAR + INTERNET_RATE;
     }
 
 }
